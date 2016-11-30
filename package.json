@@ -21,8 +21,7 @@
     "build:modern": "rollup module/index.js > build/react-redux-ab.es2015.js",
     "build:legacy": "rollup -f cjs module/index.js > build/react-redux-ab.js && babel build/react-redux-ab.js --out-file build/react-redux-ab.js",
     "build": "npm run build:modern && npm run build:legacy",
-    "prepublish": "npm run test && npm run build",
-    "postpublish": "VERSION=`node -e 'console.log(require(\"./package.json\").version)'`; git push && git push --tags"
+    "prepublish": "npm run test && npm run build"
   },
   "peerDependencies": {
     "react": "^0.14 || ^15.0 || ^15.4",
