@@ -1,0 +1,47 @@
+{
+  "name": "react-redux-ab",
+  "keywords": [
+    "A/B testing",
+    "redux",
+    "react"
+  ],
+  "version": "1.0.0",
+  "description": "A simple A/B testing library for React and Redux that can work in any environment",
+  "main": "build/react-redux-ab.js",
+  "jsnext:main": "build/react-redux-ab.es2015.js",
+  "repository": "ytase/react-redux-ab",
+  "bugs": {
+    "url": "https://github.com/ytase/react-redux-ab/issues"
+  },
+  "homepage": "https://github.com/ytase/react-redux-ab#readme",
+  "author": "Mikaël Gourlaouen <gourlaouen.mikael@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --compilers js:babel-register",
+    "build:modern": "rollup module/index.js > build/react-redux-ab.es2015.js",
+    "build:legacy": "rollup -f cjs module/index.js > build/react-redux-ab.js && babel build/react-redux-ab.js --out-file build/react-redux-ab.js",
+    "build": "npm run build:modern && npm run build:legacy",
+    "prepublish": "npm run test && npm run build",
+    "postpublish": "VERSION=`node -e 'console.log(require(\"./package.json\").version)'`; git push && git push --tags"
+  },
+  "peerDependencies": {
+    "react": "^0.14 || ^15.0 || ^15.4",
+    "react-redux": "^4.4",
+    "redux": "^2.0 || ^3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "enzyme": "^2.6.0",
+    "mocha": "^3.2.0",
+    "react": "^15.4.1",
+    "react-addons-test-utils": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-redux": "^4.4.6",
+    "redux": "^3.6.0",
+    "redux-mock-store": "^1.2.1",
+    "rollup": "^0.36.4"
+  }
+}

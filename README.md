@@ -39,7 +39,7 @@ const rootReducer = combineReducers({
 })
 ```
 
-2. Load them from the cookies at laod time (use any cookie library you want, we love [js-cookie](https://github.com/js-cookie/js-cookie):
+2. Load them from the cookies at laod time (use any cookie library you want, we love [js-cookie](https://github.com/js-cookie/js-cookie) but you can use any other function that returns a dictionnaries of all key/values in the cookies:
 
 ```javascript
 import { createStore } from 'redux'
@@ -83,6 +83,6 @@ export default function MyApp (props) {
 ```
 
 ## Recipes
-- (Use react-redux-ab on the server side)[]
+- [Use react-redux-ab on the server side](docs/recipes/serverside.md)
 
 Check out more details on parameters and possibilities in the [API docs](docs/API.md)
