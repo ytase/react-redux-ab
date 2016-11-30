@@ -1,6 +1,6 @@
 # Server side rendering
 
-Using A/B testing on the server side is pretty easy and consists mostly in 3 steps:
+Using A/B testing on the server side is pretty easy and consists mostly in 4 steps:
 - Getting the cookies for the user and extract all experiments he is participating in
 - Initialize the store with those experiments
 - Render the app

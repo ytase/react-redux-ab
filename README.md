@@ -1,17 +1,15 @@
 # react-redux-ab
-======
 
-react-redux-ab is a simple A/B testing that stores the active variants in a reducer for easy access accross the whole application. It is universal, as it can run on the client side, browser side or any kind of application where redux can run.
+**react-redux-ab** is a simple A/B testing library that stores the active variants in a reducer for easy access accross the whole application. It is universal, as it can run on the client side, browser side or any kind of application where redux can run.
 
 [API docs](docs/API.md)
 
-Compared to prior libraries, it offers the following advantages:
+Compared to prior libraries (such as [](), it offers the following advantages:
 - The availability in the store by default makes it possible to have one experiment with effects in several places in the application, even widely separated.
 - Ability to A/B test not only visual elements but also anything that has access to the store. You can for instance A/B test async action creators for speed tests.
 - Weighted variants out of the box. You can create an experiment with 4 variants but decide that one will be used by 60% of the traffic, one by 20% and the remaining two by 10% each.
 
 ## Basic client side use case
-------
 
 1. Create experiments and add them to the root reducer:
 
@@ -21,7 +19,7 @@ import { createExperiments } from 'react-redux-ab'
 
 const rootReducer = combineReducers({
 	/* Your stuff here */
-	experiments: createExperiments({
+	experiments: createExperiment(sb{
 		'buttons': {
 			variants: [
 				{name: 'blue'},
