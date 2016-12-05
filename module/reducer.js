@@ -2,11 +2,11 @@ export function chooseRandomly (variants) {
 	const weighedVariants = []
 	variants.forEach(variant => {
 		const weight = variant.weight || 1
-		for (let i=0; i < variant.weight; i++) {
+		for (let i=0; i < weight; i++) {
 			weighedVariants.push(variant)
 		}
 	})
-	return weighedVariants[Math.floor(Math.random() * (weighedVariants.length - 1))].name
+	return weighedVariants[Math.floor(Math.random() * weighedVariants.length)].name
 }
 
 function getRandomVariant(experiment) {
