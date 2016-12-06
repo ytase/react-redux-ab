@@ -11,8 +11,8 @@ export function digestCookies(cookies) {
 	return experiments
 }
 
-export function bakeCookies(state, getter) {
+export function bakeCookies(state, setter) {
 	for (let experiment in state.experiments) {
-		getter(prefix + experiment, state.experiments[experiment])
+		setter(prefix + experiment, state.experiments[experiment])
 	}
 }
