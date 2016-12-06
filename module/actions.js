@@ -5,3 +5,10 @@ export function setExperimentVariant(experiment, variant) {
 		variant
 	}
 }
+
+export function loadExperimentVariants(state) {
+	return {
+		type: 'LOAD_EXPERIMENTS_VARIANTS',
+		state
+	}
+}

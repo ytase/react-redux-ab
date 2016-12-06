@@ -24,6 +24,9 @@ export function createExperiments (experiments) {
 			case 'RESET_EXPERIMENT_VARIANT':
 				return Object.assign({}, state, {[action.experiment]: getRandomVariant(experiments[action.experiment])})
 
+			case 'LOAD_EXPERIMENTS_VARIANTS':
+				return Object.assign({}, state, action.state)
+
 			case 'SET_EXPERIMENT_VARIANT':
 				return Object.assign({}, state, {[action.experiment]: action.variant})
 

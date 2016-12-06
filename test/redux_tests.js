@@ -1,6 +1,6 @@
 import assert from 'assert'
 import { createExperiments } from '../module/reducer'
-import { setExperimentVariant } from '../module/actions'
+import { setExperimentVariant, loadExperimentVariants } from '../module/actions'
 
 const reducer = createExperiments([])
 
@@ -33,6 +33,28 @@ describe ('Experiments reducer', () => {
 			{button: 'red'}
 		)
 	})
+
+	it ('Should mix correctly the inital state with the loaded experiments', () => {
+		const reducer = createExperiments({
+			'btnExp': {
+				variants: [
+					{name: 'blue'},
+					{name: 'red'}
+				]
+			},
+			'titleExp': {
+				variants: [
+					{name: 'big'},
+					{name: 'small'}
+				]
+			}
+		})
+
+		const loadedState = {'btnExp': 'green'}
+		const finalState = reducer(undefined, {type: 'LOAD_EXPERIMENTS_VARIANTS', state: loadedState})
+		assert.equal(finalState.btnExp, 'green')
+		assert(finalState.titleExp.length > 2)
+	})
 })
 
 describe ('Experiment actions', () => {
@@ -45,5 +67,38 @@ describe ('Experiment actions', () => {
 				variant: 'variant1'
 			}
 		)
+	})
+
+	it ('Should fill the whole state in the load action', () => {
+		const state = {
+			button: 'blue',
+			title: 'big'
+		}
+		assert.deepEqual(
+			loadExperimentVariants(state),
+			{type: 'LOAD_EXPERIMENTS_VARIANTS', state}
+			)
+	})
+})
+
+describe ('Experiment creator', () => {
+	it ('Should fill the initial state with a random variant', () => {
+		const reducer = createExperiments({
+			'btnExp': {
+				variants: [
+					{name: 'blue'},
+					{name: 'red'}
+				]
+			},
+			'titleExp': {
+				variants: [
+					{name: 'big'},
+					{name: 'small'}
+				]
+			}
+		})
+		const state = reducer(undefined, {})
+		assert(state.btnExp.length > 2)
+		assert(state.titleExp.length > 2)
 	})
 })
