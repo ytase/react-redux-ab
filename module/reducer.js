@@ -15,11 +15,14 @@ function getRandomVariant(experiment) {
 }
 
 export function createExperiments (experiments) {
-	const initialState = {}
-	for (let name in experiments) {
-		initialState[name] = getRandomVariant(experiments[name])
+	function generateRandomState() {
+		const initialState = {}
+		for (let name in experiments) {
+			initialState[name] = getRandomVariant(experiments[name])
+		}
+		return initialState
 	}
-	return function reducer (state = initialState, action) {
+	return function reducer (state = generateRandomState(), action) {
 		switch (action.type) {
 			case 'RESET_EXPERIMENT_VARIANT':
 				return Object.assign({}, state, {[action.experiment]: getRandomVariant(experiments[action.experiment])})

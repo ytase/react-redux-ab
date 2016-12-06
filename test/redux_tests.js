@@ -2,7 +2,7 @@ import assert from 'assert'
 import { createExperiments } from '../module/reducer'
 import { setExperimentVariant, loadExperimentVariants } from '../module/actions'
 
-const reducer = createExperiments([])
+const reducer = createExperiments({})
 
 describe ('Experiments reducer', () => {
 	it ('Should return the initial state', () => {
@@ -54,6 +54,25 @@ describe ('Experiments reducer', () => {
 		const finalState = reducer(undefined, {type: 'LOAD_EXPERIMENTS_VARIANTS', state: loadedState})
 		assert.equal(finalState.btnExp, 'green')
 		assert(finalState.titleExp.length > 2)
+	})
+
+	it ('Should return different inital states when called several time to support server side rendering', () => {
+		const experiments = {
+			test: {
+				variants: [
+					{name: 'blue'},
+					{name: 'green'}
+				]
+			}
+		}
+		const reducer = createExperiments(experiments)
+		let results = []
+		for (let i=0; i < 200; i++) {
+			results.push(reducer(undefined, {}))
+		}
+		results = results.map(state => state.test)
+		assert(results.includes('blue'))
+		assert(results.includes('green'))
 	})
 })
 
