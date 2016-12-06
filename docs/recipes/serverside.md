@@ -21,7 +21,7 @@ app.use(cookieParser())
 app.get("/", function (req, res) {
   let initalState = {
     // Nom nom
-    experiments: digestCookies(req.cookies)
+    experiments: digestCookies(req.cookies())
   }
   const store = createStore(myStore, initalState)
   const html = React.renderToString(<Provider store={store}><MyApp /></Provider>);

@@ -1,4 +1,4 @@
-const prefix = '_react_redux_ab_'
+export const prefix = '_react_redux_ab_'
 
 export function digestCookies(cookies) {
 	let experiments = {}
