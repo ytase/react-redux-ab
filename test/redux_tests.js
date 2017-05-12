@@ -56,6 +56,21 @@ describe ('Experiments reducer', () => {
 		assert(finalState.titleExp.length > 2)
 	})
 
+	it ('Should drop now active experiments from the loading process', () => {
+		const reducer = createExperiments({
+			'btnExp': {
+				variants: [
+					{name: 'blue'},
+					{name: 'red'}
+				]
+			},
+		})
+
+		const loadedState = {'titleExp': 'big'}
+		const finalState = reducer(undefined, {type: 'LOAD_EXPERIMENTS_VARIANTS', state: loadedState})
+		assert.equal(finalState.titleExp, undefined)
+	})
+
 	it ('Should return different inital states when called several time to support server side rendering', () => {
 		const experiments = {
 			test: {
