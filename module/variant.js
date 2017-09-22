@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Variant (props) {
 	return React.Children.only(props.children)
 }
 
 Variant.propTypes = {
-	name: React.PropTypes.string.isRequired
+	name: PropTypes.string.isRequired
 }

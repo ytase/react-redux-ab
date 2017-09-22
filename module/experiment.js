@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Variant } from './variant'
 import { setExperimentVariant } from './actions'
@@ -15,7 +16,7 @@ export function Selector (props) {
 }
 
 Selector.propTypes = {
-	name: React.PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
