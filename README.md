@@ -54,7 +54,7 @@ const store = createStore(rootReducer, initialState)
 3. Connect the cookie updater to the store:
 
 ```javascript
-import { backeCookies } from 'react-redux-ab'
+import { bakeCookies } from 'react-redux-ab'
 import Cookies from 'js-cookie'
 store.subscribe(() => {
 	bakeCookies(store.getState(), Cookies.set)
