@@ -2,7 +2,7 @@
 
 **react-redux-ab** is a simple A/B testing library that stores the active variants in a reducer for easy access accross the whole application. It is universal, as it can run on the client side, browser side or any kind of application where redux can run.
 
-[API docs](docs/API.md)
+[API docs](docs/api.md)
 
 Compared to prior libraries (such as [](), it offers the following advantages:
 - The availability in the store by default makes it possible to have one experiment with effects in several places in the application, even widely separated.
@@ -83,4 +83,4 @@ export default function MyApp (props) {
 ## Recipes
 - [Use react-redux-ab on the server side](docs/recipes/serverside.md)
 
-Check out more details on parameters and possibilities in the [API docs](docs/API.md)
+Check out more details on parameters and possibilities in the [API docs](docs/api.md)
