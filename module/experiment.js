@@ -2,17 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Variant } from './variant'
-import { setExperimentVariant } from './actions'
+
+export const originalVariant = 'original'
 
 export function Selector (props) {
 	const { variant, name, children } = props
-	let chosenOne
+	let chosenOne, originalOne
 	React.Children.forEach(children, child => {
-		if (child.type === Variant && child.props.name === variant) {
-			chosenOne = React.cloneElement(child, { experiment: name })
+		if (child.type === Variant) {
+			if (child.props.name === variant) {
+				chosenOne = React.cloneElement(child, { experiment: name })
+			}
+			if (child.props.name === originalVariant) {
+				originalOne = React.cloneElement(child, { experiment: name })
+			}
 		}
 	})
-	return chosenOne || null
+	return chosenOne || originalOne || null
 }
 
 Selector.propTypes = {

@@ -1,5 +1,5 @@
 export { createExperiments } from './reducer'
 export { Variant } from './variant'
-export { Experiment } from './experiment'
+export { Experiment, originalVariant } from './experiment'
 export { setExperimentVariant, loadExperimentVariants } from './actions'
 export { digestCookies, bakeCookies } from './cookies'
