@@ -1,11 +1,11 @@
 {
-  "name": "react-redux-ab",
+  "name": "@sector-labs/react-redux-ab",
   "keywords": [
     "A/B testing",
     "redux",
     "react"
   ],
-  "version": "1.2.0",
+  "version": "1.3.0-sl.1",
   "description": "A simple A/B testing library for React and Redux that can work in any environment",
   "main": "build/react-redux-ab.js",
   "module": "build/react-redux-ab.es2015.js",
