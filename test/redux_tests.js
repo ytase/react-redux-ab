@@ -12,18 +12,16 @@ describe ('Experiments reducer', () => {
 		)
 	})
 
-	it ('Should handle a new experiment', () => {
-		assert.deepEqual(
-			reducer({cta: 'Buy it now'}, {
-				type: 'SET_EXPERIMENT_VARIANT',
-				experiment: 'button',
-				variant: 'green'
-			}),
-			{button: 'green', cta: 'Buy it now'}
-		)
-	})
-
 	it ('Should change the variant of an existing experiment', () => {
+		const reducer = createExperiments({
+			button: {
+				variants: [
+					{name: 'green'},
+					{name: 'red'},
+					{name: 'blue'}
+				]
+			}
+		})
 		assert.deepEqual(
 			reducer({button: 'green'}, {
 				type: 'SET_EXPERIMENT_VARIANT',
@@ -31,6 +29,25 @@ describe ('Experiments reducer', () => {
 				variant: 'red'
 			}),
 			{button: 'red'}
+		)
+	})
+
+	it ('Should not change the variant if experiment does not have the given variant', () => {
+		const reducer = createExperiments({
+			button: {
+				variants: [
+					{name: 'green'},
+					{name: 'blue'}
+				]
+			}
+		})
+		assert.deepEqual(
+			reducer({button: 'green'}, {
+				type: 'SET_EXPERIMENT_VARIANT',
+				experiment: 'button',
+				variant: 'red'
+			}),
+			{button: 'green'}
 		)
 	})
 
@@ -50,9 +67,35 @@ describe ('Experiments reducer', () => {
 			}
 		})
 
-		const loadedState = {'btnExp': 'green'}
-		const finalState = reducer(undefined, {type: 'LOAD_EXPERIMENTS_VARIANTS', state: loadedState})
-		assert.equal(finalState.btnExp, 'green')
+		const initialState = {'btnExp': 'blue', 'titleExp': 'small'}
+		const loadedState = {'btnExp': 'red'}
+		const finalState = reducer(initialState, {type: 'LOAD_EXPERIMENTS_VARIANTS', state: loadedState})
+		assert.equal(finalState.btnExp, 'red')
+		assert.equal(finalState.titleExp, 'small')
+		assert(finalState.titleExp.length > 2)
+	})
+
+	it ('Should not load invalid variants in state', () => {
+		const reducer = createExperiments({
+			'btnExp': {
+				variants: [
+					{name: 'blue'},
+					{name: 'red'}
+				]
+			},
+			'titleExp': {
+				variants: [
+					{name: 'big'},
+					{name: 'small'}
+				]
+			}
+		})
+
+		const initialState = {'btnExp': 'red', 'titleExp': 'big'}
+		const loadedState = {'btnExp': 'green', 'titleExp': 'small'}
+		const finalState = reducer(initialState, {type: 'LOAD_EXPERIMENTS_VARIANTS', state: loadedState})
+		assert.equal(finalState.btnExp, 'red')
+		assert.equal(finalState.titleExp, 'small')
 		assert(finalState.titleExp.length > 2)
 	})
 

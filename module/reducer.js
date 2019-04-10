@@ -14,6 +14,10 @@ function getRandomVariant(experiment) {
 	return choose(experiment.variants)
 }
 
+function findVariant(experiment, variantName) {
+	return experiment && experiment.variants.find(variant => variant.name === variantName)
+}
+
 export function createExperiments (experiments) {
 	function generateRandomState() {
 		const initialState = {}
@@ -31,18 +35,21 @@ export function createExperiments (experiments) {
 				const newState = {}
 				for (let key in state) {
 					if (action.state.hasOwnProperty(key) && state.hasOwnProperty(key)) {
-						newState[key] = action.state[key]
-					}
-					else {
-						newState[key] = state[key]
+						if (findVariant(experiments[key], action.state[key])) {
+							newState[key] = action.state[key]
+						}
 					}
 				}
-				return newState
+				return Object.assign({}, state, newState)
 			}
 
-			case 'SET_EXPERIMENT_VARIANT':
-				return Object.assign({}, state, {[action.experiment]: action.variant})
-
+			case 'SET_EXPERIMENT_VARIANT': {
+				if (findVariant(experiments[action.experiment], action.variant)) {
+					return Object.assign({}, state, { [action.experiment]: action.variant })
+				} else {
+					return state
+				}
+			}
 			default:
 				return state
 		}
